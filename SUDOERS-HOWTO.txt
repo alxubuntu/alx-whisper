@@ -1,0 +1,9 @@
+# alx-whisper sudoers — paste this single line into a terminal:
+#   sudo tee /etc/sudoers.d/alx-apt >/dev/null <<'EOF'
+#     alx ALL=(root) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt
+#   EOF
+#   sudo chmod 440 /etc/sudoers.d/alx-apt
+#   sudo -n apt-get --version
+#
+# This file is documentation; the actual rule lives in /etc/sudoers.d/alx-apt
+# once you run the above. The line is a single string, no spaces, exactly as shown.

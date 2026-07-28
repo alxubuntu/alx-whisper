@@ -1,0 +1,19 @@
+[Unit]
+Description=alx-whisper — push-to-talk transcription daemon
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+Environment=WAYLAND_DISPLAY=wayland-0
+Environment=XDG_RUNTIME_DIR=%t
+EnvironmentFile=%h/.config/alx-whisper/.env
+ExecStart=%h/.local/share/alx-whisper/.venv/bin/python3 %h/.local/share/alx-whisper/alx-whisper-daemon.py
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=3
+
+[Install]
+WantedBy=default.target
