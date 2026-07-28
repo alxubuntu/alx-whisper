@@ -2,6 +2,8 @@
 
 Dictado por voz estilo Wispr Flow para Linux. Graba desde el micrófono, envía el audio a un endpoint OpenAI-compatible (puede ser tu propio VPS con Whisper) e inyecta el texto transcrito en cualquier campo activo vía portapapeles + Ctrl+V.
 
+> ⚠️ **Compatibilidad**: GNOME + Wayland + systemd. No probado en X11, KDE, XFCE, Sway, o distros sin systemd. Ver [limitaciones](#limitaciones).
+
 ## Requisitos
 
 - Python 3.10+
@@ -62,6 +64,18 @@ Hotkey (GNOME) → SIGUSR1 → Daemon Python
                                ├── wl-copy (texto al portapapeles)
                                └── ydotool key Ctrl+V (inyección)
 ```
+
+## Limitaciones
+
+| Qué | Dónde funciona | Dónde NO |
+|---|---|---|
+| Hotkey global | GNOME (gsettings) | KDE, XFCE, Sway, i3 |
+| Inyección de texto | Wayland con `ydotool` + `wl-copy` | X11 puro (sin `xdotool` extra) |
+| Servicio persistente | `systemd --user` | Distros sin systemd |
+| Permisos ydotool | Usuario en grupo `input` | Sin configurar udev/uinput |
+| Clipboard Unicode | `wl-copy` (Wayland) | X11 (depende de `pyperclip`) |
+
+Probado en: **Ubuntu 24.04 + GNOME 46 + Wayland**.
 
 ## Licencia
 
